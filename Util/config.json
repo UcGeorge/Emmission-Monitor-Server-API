@@ -1,7 +1,7 @@
 {
     "database":{
         "host": "localhost",
-  "user": "root",
-  "password": ""
+        "user": "root",
+        "password": ""
     }
 }
