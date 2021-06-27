@@ -3,7 +3,7 @@ var mysql = require("mysql");
 var fs = require("fs");
 
 console.log("# parse config.json");
-const config = JSON.parse(fs.readFileSync('./Util/config.json', 'utf8'));
+const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
 
 exports.initDatabase = function () {
     console.log("# initDatabase");
@@ -66,9 +66,9 @@ exports.initDatabase = function () {
         )";
         con.query(sql, function (err, _result) { if (err) throw err; });
 
-        console.log("   |__ Query [INSERT INTO `emissionmonitor`.`admin`]");
-        var sql = "INSERT INTO `emissionmonitor`.`admin` (username, password, name) VALUES ('admin', 'admin@123', 'Administrator')";
-        con.query(sql, function (err, _result) { if (err) throw err; });
+        // console.log("   |__ Query [INSERT INTO `emissionmonitor`.`admin`]");
+        // var sql = "INSERT INTO `emissionmonitor`.`admin` (username, password, name) VALUES ('admin', 'admin@123', 'Administrator')";
+        // con.query(sql, function (err, _result) { if (err) throw err; });
 
         console.log("   |__ con.end");
         con.end();
