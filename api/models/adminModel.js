@@ -31,24 +31,28 @@ exports.login = function(username, password, callback){
             console.log("         |__ Connected!");
             console.log("         |__ Query [SELECT * FROM `admin` WHERE `username` = ...]");
             con.query("SELECT * FROM `admin` WHERE `username` = '" + username + "' AND `password` = '" + password + "'", function (err, result, fields) {
-                if (err) throw err;
-                if (result.length > 0){
-                    // console.log(result[0]);
-                    let res = {
-                        ID: result[0].ID,
-                        username: result[0].username,
-                        password: result[0].password,
-                        name: result[0].name,
-                        dateadded: result[0].dateadded,
-                        token: maketoken(100)
-                    };
-                    callback(null, res, res.token);
+                if (err) {
+                    callback(err, null, null);
+                    return;
                 }else{
-                    // console.log("Admin not found");
-                    let res = {
-                        message: "Invalid username and password!"
-                    };
-                    callback(null, res, null);
+                    if (result.length > 0){
+                        // console.log(result[0]);
+                        let res = {
+                            ID: result[0].ID,
+                            username: result[0].username,
+                            password: result[0].password,
+                            name: result[0].name,
+                            dateadded: result[0].dateadded,
+                            token: maketoken(100)
+                        };
+                        callback(null, res, res.token);
+                    }else{
+                        // console.log("Admin not found");
+                        let res = {
+                            message: "Invalid username and password!"
+                        };
+                        callback(res, null, null);
+                    }
                 }
             });
             console.log("         |__ con.end");

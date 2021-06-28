@@ -33,22 +33,20 @@ exports.initDatabase = function () {
 
         console.log("   |__ Query [CREATE TABLE IF NOT EXISTS `emissionmonitor`.`user`]");
         sql = "CREATE TABLE IF NOT EXISTS `emissionmonitor`.`user` ( \
-            `ID` INT NOT NULL AUTO_INCREMENT , \
             `username` VARCHAR(50) NOT NULL , \
             `password` VARCHAR(50) NOT NULL , \
             `name` VARCHAR(50) NOT NULL , \
             `dateadded` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , \
-            PRIMARY KEY (`ID`))";
+            PRIMARY KEY (`username`))";
         con.query(sql, function (err, _result) { if (err) throw err; });
 
         console.log("   |__ Query [CREATE TABLE IF NOT EXISTS `emissionmonitor`.`admin`]");
         sql = "CREATE TABLE IF NOT EXISTS `emissionmonitor`.`admin` ( \
-            `ID` INT NOT NULL AUTO_INCREMENT , \
             `username` VARCHAR(50) NOT NULL , \
             `password` VARCHAR(50) NOT NULL , \
             `name` VARCHAR(50) NOT NULL , \
             `dateadded` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , \
-            PRIMARY KEY (`ID`))";
+            PRIMARY KEY (`username`))";
         con.query(sql, function (err, _result) { if (err) throw err; });
 
         console.log("   |__ Query [CREATE TABLE IF NOT EXISTS `emissionmonitor`.`session`]");
@@ -61,14 +59,10 @@ exports.initDatabase = function () {
             `emission_quantity` DECIMAL(50, 3) NOT NULL , \
             `dateadded` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , \
             PRIMARY KEY (`ID`), \
-            FOREIGN KEY (`user_ID`) REFERENCES `emissionmonitor`.`user`(`ID`) ON DELETE CASCADE ON UPDATE CASCADE, \
+            FOREIGN KEY (`user_ID`) REFERENCES `emissionmonitor`.`user`(`username`) ON DELETE CASCADE ON UPDATE CASCADE, \
             FOREIGN KEY (`fuel_ID`) REFERENCES `emissionmonitor`.`fueltype`(`ID`) ON DELETE CASCADE ON UPDATE CASCADE \
         )";
         con.query(sql, function (err, _result) { if (err) throw err; });
-
-        // console.log("   |__ Query [INSERT INTO `emissionmonitor`.`admin`]");
-        // var sql = "INSERT INTO `emissionmonitor`.`admin` (username, password, name) VALUES ('admin', 'admin@123', 'Administrator')";
-        // con.query(sql, function (err, _result) { if (err) throw err; });
 
         console.log("   |__ con.end");
         con.end();

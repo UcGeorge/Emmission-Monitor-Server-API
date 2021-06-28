@@ -4,7 +4,8 @@ var express = require('express'),
 
 var user = require('../controllers/userController');
 router
-    .get('/login/:username/:password', user.login)
+    .get('/login', user.login)
+    .post('/signup', user.signup)
     .get('*', (req, res)=>{
         res.status(404).send({url: req.originalUrl + ' not found'})
     });
