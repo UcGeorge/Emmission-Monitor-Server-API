@@ -33,6 +33,7 @@ exports.login = function(username, password, callback){
             con.query("SELECT * FROM `user` WHERE `username` = '" + username + "' AND `password` = '" + password + "'", function (err, result, fields) {
                 if (err) {
                     callback(err, null, null);
+                    
                     return;
                 }else{
                     if (result.length > 0){
