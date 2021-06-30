@@ -5,7 +5,7 @@ var express = require('express'),
 var session = require('../controllers/sessionController');
 router
     .get('/', session.get)
-    // .post('/signup', user.signup)
+    .put('/', session.put)
     .get('*', (req, res)=>{
         res.status(404).send({url: req.originalUrl + ' not found'})
     });
