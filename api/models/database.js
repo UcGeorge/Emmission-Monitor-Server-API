@@ -36,6 +36,7 @@ exports.initDatabase = function () {
             `username` VARCHAR(50) NOT NULL , \
             `password` VARCHAR(50) NOT NULL , \
             `name` VARCHAR(50) NOT NULL , \
+            `token` VARCHAR(100) NOT NULL , \
             `dateadded` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , \
             PRIMARY KEY (`username`))";
         con.query(sql, function (err, _result) { if (err) throw err; });
@@ -45,6 +46,7 @@ exports.initDatabase = function () {
             `username` VARCHAR(50) NOT NULL , \
             `password` VARCHAR(50) NOT NULL , \
             `name` VARCHAR(50) NOT NULL , \
+            `token` VARCHAR(100) NOT NULL , \
             `dateadded` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , \
             PRIMARY KEY (`username`))";
         con.query(sql, function (err, _result) { if (err) throw err; });

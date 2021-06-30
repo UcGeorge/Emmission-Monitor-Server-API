@@ -10,10 +10,12 @@ app.use(bodyParser.json());
 
 var adminRoutes = require('./api/routes/adminRoutes');
 var userRoutes = require('./api/routes/userRoutes');
+var sessionRoutes = require('./api/routes/sessionRoutes');
 
 // Import my test routes into the path '/test'
 app.use('/admin', adminRoutes);
 app.use('/user', userRoutes);
+app.use('/sessions', sessionRoutes);
 app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})
 });
