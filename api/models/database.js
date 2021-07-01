@@ -36,6 +36,7 @@ exports.initDatabase = function () {
             `username` VARCHAR(50) NOT NULL , \
             `password` VARCHAR(50) NOT NULL , \
             `name` VARCHAR(50) NOT NULL , \
+            `token` VARCHAR(100) NOT NULL , \
             `dateadded` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , \
             PRIMARY KEY (`username`))";
         con.query(sql, function (err, _result) { if (err) throw err; });
@@ -45,6 +46,7 @@ exports.initDatabase = function () {
             `username` VARCHAR(50) NOT NULL , \
             `password` VARCHAR(50) NOT NULL , \
             `name` VARCHAR(50) NOT NULL , \
+            `token` VARCHAR(100) NOT NULL , \
             `dateadded` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , \
             PRIMARY KEY (`username`))";
         con.query(sql, function (err, _result) { if (err) throw err; });
@@ -53,13 +55,13 @@ exports.initDatabase = function () {
         sql = "CREATE TABLE IF NOT EXISTS `emissionmonitor`.`session` \
         ( \
             `ID` INT NOT NULL AUTO_INCREMENT , \
-            `user_ID` INT NOT NULL , \
+            `username` VARCHAR(50) NOT NULL , \
             `fuel_ID` INT NOT NULL , \
             `distance` DECIMAL(50, 3) NOT NULL , \
             `emission_quantity` DECIMAL(50, 3) NOT NULL , \
             `dateadded` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , \
             PRIMARY KEY (`ID`), \
-            FOREIGN KEY (`user_ID`) REFERENCES `emissionmonitor`.`user`(`username`) ON DELETE CASCADE ON UPDATE CASCADE, \
+            FOREIGN KEY (`username`) REFERENCES `emissionmonitor`.`user`(`username`) ON DELETE CASCADE ON UPDATE CASCADE, \
             FOREIGN KEY (`fuel_ID`) REFERENCES `emissionmonitor`.`fueltype`(`ID`) ON DELETE CASCADE ON UPDATE CASCADE \
         )";
         con.query(sql, function (err, _result) { if (err) throw err; });

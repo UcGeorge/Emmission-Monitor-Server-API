@@ -3,16 +3,16 @@ var fs = require("fs");
 
 const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
 
-function maketoken(length) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * 
- charactersLength));
-   }
-   return result;
-}
+// function maketoken(length) {
+//     var result           = '';
+//     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+//     var charactersLength = characters.length;
+//     for ( var i = 0; i < length; i++ ) {
+//       result += characters.charAt(Math.floor(Math.random() * 
+//  charactersLength));
+//    }
+//    return result;
+// }
 
 exports.login = function(username, password, callback){
     console.log("   |__# Admin login");
@@ -32,7 +32,7 @@ exports.login = function(username, password, callback){
             console.log("         |__ Query [SELECT * FROM `admin` WHERE `username` = ...]");
             con.query("SELECT * FROM `admin` WHERE `username` = '" + username + "' AND `password` = '" + password + "'", function (err, result, fields) {
                 if (err) {
-                    callback(err, null, null);
+                    callback(err, null);
                     return;
                 }else{
                     if (result.length > 0){
@@ -43,22 +43,22 @@ exports.login = function(username, password, callback){
                             password: result[0].password,
                             name: result[0].name,
                             dateadded: result[0].dateadded,
-                            token: maketoken(100)
+                            token: result[0].token
                         };
-                        callback(null, res, res.token);
+                        callback(null, res);
                     }else{
                         // console.log("Admin not found");
                         let res = {
                             message: "Invalid username and password!"
                         };
-                        callback(res, null, null);
+                        callback(res, null);
                     }
                 }
             });
             console.log("         |__ con.end");
             con.end();
         }catch(e){
-            callback(e, null, null);
+            callback(e, null);
         }
     });
 }
