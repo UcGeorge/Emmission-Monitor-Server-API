@@ -1,13 +1,11 @@
 'use strict';
 
 var Admin = require('../models/adminModel');
-let authtokens = [];
 
 exports.login = function(req, res) {
-    console.log("[GET] /admin/login/:username/:password");
-    Admin.login(req.params.username, req.params.password, function (err, result, token){
+    console.log("[GET] /admin/login");
+    Admin.login(req.body.username, req.body.password, function (err, result){
         if (err) res.send(err);
-        if (token) authtokens.push(token);
         res.json(result);
     });
 };

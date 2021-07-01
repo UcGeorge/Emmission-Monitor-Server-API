@@ -2,9 +2,10 @@
 var express = require('express'),
     router = express.Router();
 
-var admin = require('../controllers/adminControllers');
+var session = require('../controllers/sessionController');
 router
-    .get('/login', admin.login)
+    .get('/', session.get)
+    .put('/', session.put)
     .get('*', (req, res)=>{
         res.status(404).send({url: req.originalUrl + ' not found'})
     });
