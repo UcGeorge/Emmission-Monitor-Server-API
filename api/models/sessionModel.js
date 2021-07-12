@@ -7,9 +7,9 @@ exports.get = function(username, callback){
     console.log("   |__# Get Sessions for " + username);
     console.log("      |__# mysql.createConnection");
     let con = mysql.createConnection({
-        host: config.database.host,
-        user: config.database.user,
-        password: config.database.password,
+        host: process.env.dbhost,
+        user: process.env.dbuser,
+        password: process.env.dbpass,
         database: "emissionmonitor"
     });
 
@@ -45,9 +45,9 @@ exports.put = function(username, sessionObject, callback){
     console.log("   |__# Put Sessions for " + username);
     console.log("      |__# mysql.createConnection");
     let con = mysql.createConnection({
-        host: config.database.host,
-        user: config.database.user,
-        password: config.database.password,
+        host: process.env.dbhost,
+        user: process.env.dbuser,
+        password: process.env.dbpass,
         database: "emissionmonitor"
     });
 

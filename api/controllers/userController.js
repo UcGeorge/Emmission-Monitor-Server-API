@@ -5,8 +5,11 @@ var User = require('../models/userModel');
 exports.login = function(req, res) {
     console.log("[GET] /user/login");
     User.login(req.body.username, req.body.password, function (err, result){
-        if (err) res.send(err);
-        res.json(result);
+        if (err){ 
+            res.status(401).send(err);
+        }else{
+            res.json(result);
+        }
     });
 };
 

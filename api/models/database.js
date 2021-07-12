@@ -1,17 +1,17 @@
 "use strict"; 
 var mysql = require("mysql");
-var fs = require("fs");
+// var fs = require("fs");
 
-console.log("# parse config.json");
-const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
+// console.log("# parse config.json");
+// const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
 
 exports.initDatabase = function () {
     console.log("# initDatabase");
     console.log("|__ initialize con object");
     var con = mysql.createConnection({
-        host: config.database.host,
-        user: config.database.user,
-        password: config.database.password
+        host: process.env.dbhost,
+        user: process.env.dbuser,
+        password: process.env.dbpass
     });
     console.log("|__# con.connect");
     con.connect(function (err) { 

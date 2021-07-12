@@ -2,7 +2,10 @@ var express = require('express'),
   app = express(),
   port = process.env.PORT || 3000,
   Admin = require('./api/models/adminModel'), //created model loading here
-  bodyParser = require('body-parser');
+  bodyParser = require('body-parser'),
+  dotenv = require('dotenv');
+
+dotenv.config();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

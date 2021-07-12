@@ -18,9 +18,9 @@ exports.login = function(username, password, callback){
     console.log("   |__# Admin login");
     console.log("      |__# mysql.createConnection");
     let con = mysql.createConnection({
-        host: config.database.host,
-        user: config.database.user,
-        password: config.database.password,
+        host: process.env.dbhost,
+        user: process.env.dbuser,
+        password: process.env.dbpass,
         database: "emissionmonitor"
     });
 

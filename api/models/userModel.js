@@ -18,9 +18,9 @@ exports.login = function(username, password, callback){
     console.log("   |__# User login");
     console.log("      |__# mysql.createConnection");
     let con = mysql.createConnection({
-        host: config.database.host,
-        user: config.database.user,
-        password: config.database.password,
+        host: process.env.dbhost,
+        user: process.env.dbuser,
+        password: process.env.dbpass,
         database: "emissionmonitor"
     });
 
@@ -47,11 +47,7 @@ exports.login = function(username, password, callback){
                         };
                         callback(null, res);
                     }else{
-                        // console.log("Admin not found");
-                        let res = {
-                            message: "Invalid username and password!"
-                        };
-                        callback(null, res);
+                        callback("Invalid username and password!", null);
                     }
                 }
             });
@@ -67,9 +63,9 @@ exports.signup = function(username, password, name, callback){
     console.log("   |__# User signup");
     console.log("      |__# mysql.createConnection");
     let con = mysql.createConnection({
-        host: config.database.host,
-        user: config.database.user,
-        password: config.database.password,
+        host: process.env.dbhost,
+        user: process.env.dbuser,
+        password: process.env.dbpass,
         database: "emissionmonitor"
     });
 
@@ -106,9 +102,9 @@ exports.authenticate = function(token, username, callback){
     console.log("   |__# Authenticate: " + token);
     console.log("      |__# mysql.createConnection");
     let con = mysql.createConnection({
-        host: config.database.host,
-        user: config.database.user,
-        password: config.database.password,
+        host: process.env.dbhost,
+        user: process.env.dbuser,
+        password: process.env.dbpass,
         database: "emissionmonitor"
     });
 

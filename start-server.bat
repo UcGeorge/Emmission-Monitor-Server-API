@@ -1,2 +1,2 @@
 cls
-npm run start
+npm run dev
