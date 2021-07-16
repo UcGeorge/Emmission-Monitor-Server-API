@@ -23,3 +23,27 @@ exports.signup = function(req, res) {
         }
     });
 };
+
+exports.update = function(req, res) {
+    console.log("[PUT] /user/update");
+    User.authenticate(req.body.token, req.body.username, function (err, result){
+        if (err){
+            console.log(`   |__ Error: ${err}`);
+            res.send(err)
+        }
+        else if(result){
+            User.update(req.body.username, req.body.password, req.body.name, function (err, result){
+                if (err) {
+                    res.status(400).send(err);
+                }else{
+                    res.status(200).json(result);
+                }
+            });
+        }else{
+            console.log(`   |__ Unauthorized!!`);
+            res.status(401).json({
+                message:"Unauthorized"
+            })
+        }
+    });
+};

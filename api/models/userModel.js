@@ -142,3 +142,37 @@ exports.authenticate = function(token, username, callback){
         }
     });
 }
+
+exports.update = function(username, password, name, callback){
+    console.log("   |__# User signup");
+    console.log("      |__# mysql.createConnection");
+    let con = mysql.createConnection({
+        host: process.env.dbhost,
+        user: process.env.dbuser,
+        password: process.env.dbpass,
+        database: "emissionmonitor"
+    });
+
+    console.log("      |__# con.connect");
+    con.connect(function(err) {
+        try{
+            if (err) throw err;
+            console.log("         |__ Connected!");
+            console.log("         |__ Query [UPDATE `emissionmonitor`.`user`]");
+            var sql = `UPDATE \`emissionmonitor\`.\`user\` SET \`username\` = '${username}', \`password\` = '${password}', \`name\` = '${name}' WHERE \`username\` = '${username}'`;
+            con.query(sql, function (err, result, fields) {
+                if (err) {
+                    console.log(`            |__ Error: ${err.sqlMessage}`);
+                    callback(err, null);
+                    return;
+                }else{
+                    callback(null, result);
+                }
+            });
+            console.log("         |__ con.end");
+            con.end();
+        }catch(e){
+            callback(e, null);
+        }
+    });
+}
