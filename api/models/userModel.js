@@ -98,7 +98,7 @@ exports.signup = function(username, password, name, callback){
     });
 }
 
-exports.authenticate = function(token, username, callback){
+exports.authenticate = function(token, callback){
     console.log("   |__# Authenticate: " + token);
     console.log("      |__# mysql.createConnection");
     let con = mysql.createConnection({
@@ -125,7 +125,7 @@ exports.authenticate = function(token, username, callback){
                     return;
                 }else{
                     let res = false;
-                    if(result.length > 0 && result[0].username == username ){
+                    if(result.length > 0){
                         res = true;
                         console.log(`           |__ Authenticated!`);
                     }else{

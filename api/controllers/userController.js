@@ -26,7 +26,7 @@ exports.signup = function(req, res) {
 
 exports.update = function(req, res) {
     console.log("[PUT] /user/update");
-    User.authenticate(req.body.token, req.body.username, function (err, result){
+    User.authenticate(req.body.token, function (err, result){
         if (err){
             console.log(`   |__ Error: ${err}`);
             res.send(err)

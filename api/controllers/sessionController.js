@@ -6,7 +6,7 @@ var Fuel = require('../models/fuelModel');
 
 exports.get = function(req, res) {
     console.log("[GET] /sessions");
-    User.authenticate(req.body.token, req.body.username, function (err, result){
+    User.authenticate(req.body.token, function (err, result){
         if (err){
             console.log(`   |__ Error: ${err}`);
             res.send(err)
@@ -28,7 +28,7 @@ exports.get = function(req, res) {
 
 exports.put = function(req, res) {
     console.log("[PUT] /sessions");
-    User.authenticate(req.body.token, req.body.username, function (err, result){
+    User.authenticate(req.body.token, function (err, result){
         if (err){
             console.log(`   |__ Error: ${err}`);
             res.send(err)
